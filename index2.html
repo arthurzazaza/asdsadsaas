@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>บัตรประจำตัวดิจิทัล (เดโม่)</title>
+<style>
+:root{--bg:#eef2f7;--ink:#14213d;--muted:#5b6b82;--brand:#0f766e;--brand2:#14b8a6;--card:#ffffff;--line:#d9e1ec;--sheet:#ffffff;--hdr:#303891;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow-x:hidden;background:linear-gradient(to bottom,#303891 50%,#ffffff 50%) no-repeat fixed;color:var(--ink);font-family:"Prompt","Noto Sans Thai",system-ui,-apple-system,Tahoma,sans-serif}
+.sheet{background:#fff;border-radius:22px 22px 0 0;margin:18px calc(50% - 50vw) 0;padding:6px calc(50vw - 50%) 20px}
+.sheet h3{margin-top:14px}
+.app{max-width:420px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;background:transparent}
+header{background:var(--hdr);color:#fff;padding:18px 18px 74px}
+.hi{display:flex;align-items:center;gap:12px}
+.av{width:56px;height:56px;border-radius:50%;background:#fff;overflow:hidden;flex:0 0 56px}
+.av svg{width:100%;height:100%;display:block}
+.hmid{flex:1;min-width:0}
+.hrow{display:flex;align-items:center;gap:10px;font-size:16px;color:#dfe3ff}
+.badge{font-size:10.5px;letter-spacing:.12em;background:#4cba3f;color:#fff;padding:2px 12px;border-radius:99px;font-weight:500}
+.hname{font-size:18px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px;color:#fff}
+.hbtns{display:flex;gap:10px}
+.hbtn{width:46px;height:46px;flex:0 0 46px;border-radius:50%;background:#262c70;border:0;display:grid;place-items:center;position:relative;padding:0;cursor:pointer}
+.hbtn svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hbtn .dot{position:absolute;top:9px;right:10px;width:10px;height:10px;border-radius:50%;background:#ef4444}
+main{flex:1;padding:0 16px 130px;margin-top:-58px}
+.page{display:none}.page.on{display:block}
+.idcard{position:relative;background:linear-gradient(135deg,#e6fffb,#dbeafe);color:#0b2545;border-radius:16px;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.25);overflow:hidden}
+.idcard::after{content:"ตัวอย่าง · DEMO";position:absolute;right:-34px;top:26px;transform:rotate(35deg);background:#f59e0b;color:#3b2300;font-size:10px;font-weight:800;letter-spacing:.08em;padding:3px 40px}
+.row{display:flex;gap:14px}
+.info{flex:1;min-width:0}
+.t{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#0f766e;font-weight:800}
+.num{font-size:17px;font-weight:700;margin:4px 0 10px;letter-spacing:.06em}
+.lbl{font-size:10px;color:#4b6584;margin-top:7px}
+.val{font-size:14px;font-weight:600}
+.photo{position:relative;flex:0 0 96px;width:96px;height:128px;border-radius:10px;overflow:hidden;border:2px solid #fff;background:#cbd5e1;cursor:pointer;padding:0;align-self:flex-end}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .ov{position:absolute;inset:0;background:rgba(10,30,50,.55);display:grid;place-items:center;opacity:0;transition:opacity .15s}
+.photo:hover .ov,.photo:focus-visible .ov{opacity:1}
+.photo svg.cam{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:1.8}
+@media (hover:none){.photo .ov{opacity:.0}.photo::after{content:"";position:absolute;right:5px;bottom:5px;width:18px;height:18px;border-radius:50%;background:rgba(10,30,50,.7) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'%3E%3Cpath d='M4 8h3l2-3h6l2 3h3v11H4z'/%3E%3Ccircle cx='12' cy='13' r='3.5'/%3E%3C/svg%3E") center/12px no-repeat}}
+.hint{text-align:center;color:rgba(255,255,255,.85);font-size:12px;margin:10px 0 0}
+h3{margin:22px 4px 10px;font-size:16px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.mh{display:flex;justify-content:space-between;align-items:baseline}
+.mh small{color:var(--muted);font-size:13px;font-weight:500}
+.bn{position:relative;margin-top:20px;border-radius:22px;overflow:hidden;background:#232323;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.bn-track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1);will-change:transform}
+.bn-slide{flex:0 0 100%;min-height:122px;display:flex;align-items:center;padding:16px 14px 26px 18px;color:#fff;
+background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M14 2l12 12-12 12L2 14z' fill='none' stroke='%23ffffff' stroke-opacity='.07'/%3E%3C/svg%3E"),radial-gradient(circle at 30% 15%,#4d4d4d,#232323 70%)}
+.bn-slide.b2{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M14 2l12 12-12 12L2 14z' fill='none' stroke='%23ffffff' stroke-opacity='.07'/%3E%3C/svg%3E"),radial-gradient(circle at 30% 15%,#3b4590,#171d45 70%)}
+.bn-slide.b3{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28'%3E%3Cpath d='M14 2l12 12-12 12L2 14z' fill='none' stroke='%23ffffff' stroke-opacity='.07'/%3E%3C/svg%3E"),radial-gradient(circle at 30% 15%,#1f6b66,#0b2f2d 70%)}
+.bn-slide .tx{flex:1;text-align:center;min-width:0}
+.bn-slide .t1{font-size:19px;font-weight:500;line-height:1.35}
+.bn-slide .t2{font-size:11px;opacity:.9;margin-top:4px;line-height:1.5}
+.bn-slide .ln{display:flex;align-items:center;gap:6px;justify-content:center;margin:8px 0}
+.bn-slide .ln i{flex:1;height:1px;background:#bbb;max-width:56px}
+.bn-slide .ln b{width:6px;height:6px;border:1px solid #ccc;transform:rotate(45deg)}
+.bn-slide .t3{font-size:9.5px;opacity:.8;line-height:1.5}
+.bn-slide svg{width:84px;height:84px;flex:0 0 84px;margin-left:6px;border-radius:16px}
+.bn-dots{position:absolute;left:0;right:0;bottom:8px;display:flex;justify-content:center;gap:6px}
+.bn-dots button{width:7px;height:7px;padding:0;border:0;border-radius:99px;background:rgba(255,255,255,.4);cursor:pointer;transition:width .25s,background .25s}
+.bn-dots button.on{width:20px;background:#fff}
+@media (prefers-reduced-motion:reduce){.bn-track{transition:none}}
+.qa{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:12px}
+.qa button{border:0;background:#262c70;color:#fff;font:inherit;cursor:pointer;height:40px;display:flex;align-items:center;justify-content:center;gap:7px;padding:0}
+.qa svg{width:19px;height:19px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:0 0 19px}
+.qa .rb{width:40px;flex:0 0 40px;border-radius:50%}
+.qa .pill{flex:1;max-width:170px;border-radius:99px;font-size:14px;font-weight:600}
+.qa button:active{background:#1c2158}
+.qa .spin svg{animation:sp .7s linear}
+@keyframes sp{to{transform:rotate(360deg)}}
+.zoom{position:fixed;inset:0;background:rgba(10,12,40,.92);display:none;align-items:center;justify-content:center;z-index:30;padding:16px}
+.zoom.on{display:flex}
+.zoom .zc{transform-origin:center center;flex:0 0 auto}
+.zoom .zx{position:absolute;top:6px;right:6px;width:30px;height:30px;border-radius:50%;border:0;background:#262c70;color:#fff;font-size:15px;line-height:1;padding:0;cursor:pointer}
+#idcard{cursor:pointer}
+.photo .ov{display:none!important}.photo::after{display:none!important}
+.idcard .cov{position:absolute;inset:0;z-index:3;background:rgba(10,30,50,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:#fff;font-size:14px;font-weight:600;opacity:0;transition:opacity .15s;pointer-events:none}
+.idcard .cov svg{width:30px;height:30px;stroke:#fff;fill:none;stroke-width:1.8}
+@media (hover:hover){.idcard:hover .cov,.idcard:focus-visible .cov{opacity:1}}
+.idcard .cbadge{display:none;position:absolute;left:6px;bottom:6px;z-index:3;width:24px;height:24px;border-radius:50%;background:rgba(10,30,50,.7);place-items:center;pointer-events:none}
+.idcard .cbadge svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2}
+@media (hover:none){.idcard .cbadge{display:grid}}
+.wholeimg{display:none;position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.idcard.whole{padding:0;aspect-ratio:856/540;background:#000}
+.idcard.whole .row{display:none}
+.idcard.whole::after{display:none}
+.idcard.whole .wholeimg{display:block}
+.zoom .cov,.zoom .cbadge{display:none!important}
+.news{max-height:340px;overflow-y:auto;border:1px solid var(--line);border-radius:14px;padding:4px 14px;-webkit-overflow-scrolling:touch}
+.ni{padding:12px 0;border-bottom:1px solid var(--line)}
+.ni:last-child{border:0}
+.ni .tag{display:inline-block;font-size:10.5px;color:#303891;background:#eceefb;border-radius:99px;padding:1px 10px;font-weight:500}
+.ni b{display:block;font-weight:600;font-size:14px;margin:6px 0 2px}
+.ni p{margin:0;font-size:12px;color:var(--muted);line-height:1.55}
+.ni small{display:block;margin-top:4px;font-size:11px;color:#9aa3b5}
+.tile{text-align:center;font-size:12px;line-height:1.35;color:var(--ink)}
+.tile.off{color:#c4c4ca}
+.ic{width:60px;height:60px;border-radius:50%;background:#f0eff8;display:grid;place-items:center;margin:0 auto 8px}
+.tile.off .ic{background:#f1f1f3}
+.ic svg{width:34px;height:34px}
+.list{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 14px}
+.list div{padding:11px 0;border-bottom:1px solid var(--line);font-size:14px}
+.list div:last-child{border:0}
+.list span{color:var(--muted);display:block;font-size:12px}
+nav{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid #dcdce0;z-index:10}
+.navin{max-width:420px;margin:0 auto;display:flex;align-items:flex-end;padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;background:none;border:0;color:#222;font:inherit;font-size:12px;font-weight:500;padding:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:4px}
+nav button svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+nav button.on:not(.scan) svg{color:#1f1fc0}
+.lb::after{content:"";display:block;height:4px;margin-top:3px;border-radius:4px;background:transparent}
+nav button.on:not(.scan) .lb::after{background:#1f1fc0}
+nav button.scan .sc{width:68px;height:68px;border-radius:50%;background:#303891;display:grid;place-items:center;margin-top:-38px;box-shadow:0 0 0 5px #fff}
+nav button.scan svg{stroke:#fff;width:36px;height:36px}
+nav button.scan .lb{margin-top:2px}
+.btn{border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer}
+.btn.p{background:var(--brand);color:#fff}.btn.g{background:var(--line);color:var(--ink)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:20px;z-index:20}
+.modal.on{display:flex}
+.box{background:var(--sheet);border-radius:16px;padding:18px;width:100%;max-width:320px;text-align:center}
+.prev{width:150px;height:200px;margin:12px auto;border-radius:10px;overflow:hidden;border:2px solid var(--line)}
+.prev img{width:100%;height:100%;object-fit:cover}
+.acts{display:flex;gap:10px;justify-content:center}
+.err{color:#dc2626;font-size:12px;min-height:16px}
+.hname{outline:0;border-bottom:1px dashed transparent;cursor:text}.hname:hover{border-bottom-color:rgba(255,255,255,.35)}.hname:focus{border-bottom-color:#fff;text-overflow:clip}
+button.av{border:0;padding:0;cursor:pointer;position:relative;display:block}.av img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}.av img[hidden]{display:none}.av:focus-visible{outline:2px solid #fff;outline-offset:2px}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap">
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="hi">
+    <button class="av" id="avBtn" type="button" aria-label="เปลี่ยนรูปโปรไฟล์"><svg viewBox="0 0 56 56"><rect width="56" height="56" fill="#fff"/><path d="M7 56c0-11 8-16 21-16s21 5 21 16z" fill="#1f2a6b"/><rect x="24" y="34" width="8" height="8" rx="3" fill="#f1bf94"/><ellipse cx="28" cy="26" rx="10" ry="12" fill="#f6c9a0"/><path d="M17 25c-3-10 3-17 12-17s14 6 10 16c-1-5-4-8-10-8s-9 3-12 9z" fill="#5a3320"/><circle cx="24" cy="27" r="1.2" fill="#3a2a20"/><circle cx="32" cy="27" r="1.2" fill="#3a2a20"/></svg><img id="avImg" alt="" hidden></button>
+    <input type="file" id="avFile" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" hidden>
+    <div class="hmid"><div class="hrow"><span>สวัสดี</span><span class="badge">ONLINE</span></div><div class="hname" id="hname" contenteditable="plaintext-only" spellcheck="false" role="textbox" aria-label="ชื่อ (แก้ไขได้)" enterkeyhint="done">นายอาเธอร์ ตัวอย่าง</div></div>
+    <div class="hbtns">
+      <button class="hbtn" type="button" aria-label="การแจ้งเตือน"><svg viewBox="0 0 24 24"><path d="M5.5 17h13l-1.8-2.6V10.5a4.7 4.7 0 0 0-9.4 0v3.9z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="dot"></span></button>
+      <button class="hbtn" type="button" aria-label="ออกจากระบบ"><svg viewBox="0 0 24 24"><path d="M12 3v8"/><path d="M7 6.6a8 8 0 1 0 10 0"/></svg></button>
+    </div>
+  </div>
+</header>
+<main>
+  <section class="page on" id="p-home">
+    <div class="idcard" id="idcard" role="button" tabindex="0" aria-label="เปลี่ยนรูปบัตรทั้งใบ"><img class="wholeimg" id="wholeImg" alt="ID card"><span class="cov"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>เปลี่ยนรูปบัตรทั้งใบ</span><span class="cbadge"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span>
+      <div class="row">
+        <div class="info">
+          <div class="t">บัตรสมาชิก</div>
+          <div class="num">0000 0000 0000</div>
+          <div class="lbl">ชื่อ-สกุล</div><div class="val">อาเธอร์ ตัวอย่าง</div>
+          <div class="lbl">วันเกิด</div><div class="val">1 ม.ค. 2543</div>
+          <div class="lbl">วันหมดอายุ</div><div class="val">31 ธ.ค. 2573</div>
+        </div>
+        <button class="photo" id="photoBtn" aria-label="เปลี่ยนรูปภาพ" type="button">
+          <img id="photoImg" alt="ID photo">
+          <span class="ov"><svg class="cam" viewBox="0 0 24 24"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span>
+        </button>
+      </div>
+    </div>
+    <div class="qa">
+      <button class="rb" id="qProfile" type="button" aria-label="โปรไฟล์"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 19.5c1.2-3.6 4-5 7-5s5.800 1.400 7 5"/></svg></button>
+      <button class="pill" id="qExpand" type="button"><svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-7 7M10 20H4v-6M4 20l7-7"/></svg>ขยายรูปบัตร</button>
+      <button class="rb" id="qRefresh" type="button" aria-label="รีเฟรช"><svg viewBox="0 0 24 24"><path d="M19.500 12a7.500 7.500 0 0 1-13 5.100"/><path d="M4.500 12a7.500 7.500 0 0 1 13-5.100"/><path d="M17.800 3.500v4h-4M6.200 20.500v-4h4"/><circle cx="12" cy="12" r="1.600"/></svg></button>
+    </div>
+    
+    <div class="sheet"><h3 class="mh"><span>เมนูบริการ</span><small>ทั้งหมด ›</small></h3>
+    <div class="grid">
+      <div class="tile"><span class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#303891" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="9" width="36" height="26" rx="3"/><circle cx="22" cy="21" r="8.5"/><circle cx="22" cy="19" r="2.5"/><path d="M17.5 25c1.5-2 7.5-2 9 0"/><path d="M28.5 27.5l7 7"/></svg></span>ตรวจสอบ<br>ข้อมูล</div>
+      <div class="tile"><span class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#303891" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M14 6h14l8 8v26a2 2 0 0 1-2 2H14a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/><path d="M28 6v8h8"/><path d="M18 28l5 5 8-9"/></svg></span>การรับรอง<br>เอกสาร</div>
+      <div class="tile"><span class="ic"><svg viewBox="0 0 48 48" stroke-linejoin="round" stroke-linecap="round"><path fill="#303891" stroke="#303891" stroke-width="3" d="M24 6l16 8v20l-16 8-16-8V14z"/><path fill="none" stroke="#f0eff8" stroke-width="2.5" d="M8 14l16 8 16-8M24 22v20"/></svg></span>แจ้งย้าย<br>ที่อยู่</div>
+      <div class="tile off"><span class="ic"><svg viewBox="0 0 48 48" fill="none" stroke="#c4c4ca" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="27" cy="23" r="14"/><path d="M27 15v9l5 4"/><path d="M6 20h8M6 27h8M10 34h4"/></svg></span>เร็วๆ นี้</div>
+    </div>
+    <div class="bn" id="bn" aria-roledescription="carousel" aria-label="ประกาศ">
+      <div class="bn-track" id="bnTrack">
+        <div class="bn-slide"><div class="tx"><div class="t1">สถิตอยู่ในใจตราบนิรันดร์</div><div class="t2">น้อมสำนึกในพระมหากรุณาธิคุณอันหาที่สุดมิได้</div><div class="ln"><i></i><b></b><i></i></div><div class="t3">ข้าพุทธเจ้า ผู้บริหาร ข้าราชการ พนักงานและเจ้าหน้าที่<br>กรมการปกครอง</div></div><svg viewBox="0 0 84 84" aria-hidden="true"><defs><linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6b6b6b"/><stop offset="1" stop-color="#2e2e2e"/></linearGradient></defs><rect width="84" height="84" fill="url(#bg1)"/><path d="M8 84c0-17 13-26 34-26s34 9 34 26z" fill="#9a9a9a"/><path d="M34 58l8 12 8-12z" fill="#d6d6d6"/><rect x="37" y="48" width="10" height="12" rx="4" fill="#bdbdbd"/><ellipse cx="42" cy="35" rx="13" ry="15" fill="#cfcfcf"/><path d="M28 34c-3-17 8-24 15-24s19 7 13 24c-2-9-6-13-14-13s-12 4-14 13z" fill="#4a4a4a"/><circle cx="42" cy="10" r="6" fill="#4a4a4a"/></svg></div>
+        <div class="bn-slide b2"><div class="tx"><div class="t1">บัตรดิจิทัล สะดวก ปลอดภัย</div><div class="t2">ยืนยันตัวตนได้ทุกที่ ทุกเวลา ผ่านมือถือเครื่องเดียว</div><div class="ln"><i></i><b></b><i></i></div><div class="t3">ข้อความตัวอย่างสำหรับการนำเสนอ</div></div><svg viewBox="0 0 84 84" aria-hidden="true"><rect width="84" height="84" fill="#ffffff" fill-opacity=".1"/><rect x="12" y="22" width="60" height="40" rx="6" fill="#e6fffb"/><circle cx="29" cy="40" r="8" fill="#14b8a6"/><path d="M17 56c1-8 6-10 12-10s11 2 12 10z" fill="#0f766e"/><rect x="46" y="33" width="20" height="4" rx="2" fill="#303891"/><rect x="46" y="42" width="20" height="4" rx="2" fill="#9aa8e8"/><rect x="46" y="51" width="13" height="4" rx="2" fill="#9aa8e8"/></svg></div>
+        <div class="bn-slide b3"><div class="tx"><div class="t1">ระวังภัยมิจฉาชีพออนไลน์</div><div class="t2">อย่ากดลิงก์จากข้อความที่ไม่ทราบแหล่งที่มา</div><div class="ln"><i></i><b></b><i></i></div><div class="t3">ตรวจสอบกับช่องทางทางการเท่านั้น</div></div><svg viewBox="0 0 84 84" aria-hidden="true"><rect width="84" height="84" fill="#ffffff" fill-opacity=".1"/><path d="M42 12l26 10v18c0 16-11 26-26 32-15-6-26-16-26-32V22z" fill="#14b8a6"/><path d="M42 12l26 10v18c0 16-11 26-26 32z" fill="#0f766e"/><path d="M30 42l9 9 16-18" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <div class="bn-dots" id="bnDots"></div>
+    </div>
+    <h3 class="mh" style="margin-top:24px"><span>ประกาศทั้งหมด</span><small>ดูทั้งหมด ›</small></h3>
+    <div class="news">
+      <div class="ni"><span class="tag">ระบบ</span><b>ปรับปรุงระบบชั่วคราวคืนวันเสาร์</b><p>ระบบจะหยุดให้บริการชั่วคราวเวลา 01.00–03.00 น. เพื่อปรับปรุงประสิทธิภาพ</p><small>22 ต.ค. 2569</small></div>
+      <div class="ni"><span class="tag">ฟีเจอร์ใหม่</span><b>เพิ่มการเปลี่ยนรูปภาพบนบัตร</b><p>ตอนนี้แตะที่รูปภาพเพื่อเลือกรูปใหม่จากเครื่องได้ทันที รองรับ JPG, PNG และ WEBP</p><small>20 ต.ค. 2569</small></div>
+      <div class="ni"><span class="tag">ความปลอดภัย</span><b>ระวังข้อความหลอกลวงอ้างชื่อแอป</b><p>หากได้รับลิงก์ผ่าน SMS และอีเมลให้กรอกข้อมูลส่วนตัว ไม่ควรกดลิงก์และควรตรวจสอบกับช่องทางทางการเท่านั้น</p><small>18 ต.ค. 2569</small></div>
+      <div class="ni"><span class="tag">บริการ</span><b>เปิดให้บริการตรวจสอบข้อมูลแบบออนไลน์</b><p>ตรวจสอบสถานะสมาชิกและวันหมดอายุผ่านแอปได้แล้ว ไม่ต้องเดินทางไปที่ทำการ</p><small>15 ต.ค. 2569</small></div>
+      <div class="ni"><span class="tag">กิจกรรม</span><b>วันเปิดตัวคู่มือการใช้งานบัตรดิจิทัล</b><p>เชิญชมเวิร์คช็อปแนะนำการใช้งาน พร้อมซักถามทีมงานได้แบบสด ณ ศูนย์กิจกรรมชั้น 1</p><small>12 ต.ค. 2569</small></div>
+      <div class="ni"><span class="tag">ระบบ</span><b>อัปเดตเวอร์ชัน 1.2 ปรับปรุงความเสถียร</b><p>แก้ไขปัญหาแอปค้างเมื่อสแกนเอกสาร และปรับปรุงความเร็วในการเปิดแอป</p><small>9 ต.ค. 2569</small></div>
+      <div class="ni"><span class="tag">ความปลอดภัย</span><b>แนะนำการตั้งรหัส PIN ให้ปลอดภัย</b><p>ไม่ควรใช้วันเกิดหรือเลขซ้ำ และควรเปลี่ยนรหัสเป็นระยะ</p><small>5 ต.ค. 2569</small></div>
+      <div class="ni"><span class="tag">บริการ</span><b>เพิ่มช่องทางติดต่อฝ่ายสนับสนุนผ่านแชท</b><p>พบปัญหาการใช้งาน ส่งข้อความถึงทีมงานได้ทุกวัน เวลา 08.00–20.00 น.</p><small>1 ต.ค. 2569</small></div>
+    </div></div>
+  </section>
+  <section class="page" id="p-docs"><div class="sheet" style="margin-top:70px;min-height:60vh"><h3>เอกสาร</h3>
+    <div class="list"><div>ใบรับรองสมาชิก<span>เอกสารตัวอย่าง</span></div><div>หลักฐานที่อยู่<span>เอกสารตัวอย่าง</span></div></div></div></section>
+  <section class="page" id="p-hist"><div class="sheet" style="margin-top:70px;min-height:60vh"><h3>ประวัติ</h3>
+    <div class="list"><div>ยืนยันตัวตนแล้ว<span>วันนี้ · รายการตัวอย่าง</span></div><div>เปิดดูบัตร<span>เมื่อวาน · รายการตัวอย่าง</span></div></div></div></section>
+  <section class="page" id="p-set"><div class="sheet" style="margin-top:70px;min-height:60vh"><h3>ตั้งค่า</h3>
+    <div class="list"><div>รูปภาพ<span>เก็บไว้ในเบราว์เซอร์นี้เท่านั้น</span></div>
+    <div><button class="btn g" id="reset" type="button">รีเซ็ตเป็นรูปภาพเริ่มต้น</button></div>
+    <div><button class="btn g" id="avReset" type="button">รีเซ็ตรูปโปรไฟล์</button></div></div></div></section>
+<section class="page" id="p-scan"><div class="sheet" style="margin-top:70px;min-height:60vh"><h3>สแกน</h3>
+    <div class="list"><div>เปิดกล้องเพื่อสแกน QR<span>ฟีเจอร์ตัวอย่างสำหรับการนำเสนอ</span></div></div></div></section>
+</main>
+<nav><div class="navin">
+  <button class="on" data-p="p-home"><svg viewBox="0 0 32 32"><path d="M3 16L15 5l12 11"/><path d="M7 14v13h16V14"/><path d="M12 27v-7a3 3 0 0 1 6 0v7"/><path d="M21 8V4.5h3.5v7"/></svg><span class="lb">หน้าแรก</span></button>
+  <button data-p="p-docs"><svg viewBox="0 0 32 32"><path d="M9 4h10l6 6v17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path d="M19 4v6h6"/><path d="M12 15h8M12 19h8M12 23h5"/></svg><span class="lb">เอกสาร</span></button>
+  <button class="scan" data-p="p-scan"><span class="sc"><svg viewBox="0 0 32 32"><path d="M4 11V9.500A5.500 5.500 0 0 1 9.500 4H11M21 4h1.500A5.500 5.500 0 0 1 28 9.500V11M28 21v1.500a5.500 5.500 0 0 1-5.500 5.500H21M11 28H9.500A5.500 5.500 0 0 1 4 22.500V21"/><circle cx="7.800" cy="16" r="1.700" fill="#fff" stroke="none"/><circle cx="13.300" cy="16" r="1.700" fill="#fff" stroke="none"/><circle cx="18.700" cy="16" r="1.700" fill="#fff" stroke="none"/><circle cx="24.200" cy="16" r="1.700" fill="#fff" stroke="none"/></svg></span><span class="lb">สแกน</span></button>
+  <button data-p="p-hist"><svg viewBox="0 0 32 32"><path d="M5 16a11 11 0 1 0 3.5-8"/><path d="M4 4.5V11h6.5"/><path d="M16 10v6l4 3"/></svg><span class="lb">ประวัติ</span></button>
+  <button data-p="p-set"><svg viewBox="0 0 32 32"><path d="M4 10h6M18 10h10M4 22h10M22 22h6"/><circle cx="14" cy="10" r="4"/><circle cx="18" cy="22" r="4"/></svg><span class="lb">ตั้งค่า</span></button>
+</div></nav>
+</div>
+
+<div class="modal" id="cmodal"><div class="box">
+  <b>ใช้รูปนี้แทนบัตรทั้งใบหรือไม่?</b>
+  <div class="prev" style="width:240px;height:151px"><img id="cprev" alt="Preview"></div>
+  <div class="err" id="cerr"></div>
+  <div class="acts"><button class="btn g" id="ccancel" type="button">ยกเลิก</button><button class="btn p" id="cok" type="button">ใช้รูปนี้</button></div>
+</div></div>
+<input type="file" id="cardFile" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" hidden>
+<div class="zoom" id="zoom"><button class="zx" id="zx" type="button" aria-label="ปิด">✕</button><div class="zc" id="zc"></div></div>
+<input type="file" id="file" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" hidden>
+<div class="modal" id="modal"><div class="box">
+  <b>ใช้รูปภาพนี้หรือไม่?</b>
+  <div class="prev"><img id="prevImg" alt="Preview"></div>
+  <div class="err" id="err"></div>
+  <div class="acts"><button class="btn g" id="cancel" type="button">ยกเลิก</button><button class="btn p" id="ok" type="button">ใช้รูปนี้</button></div>
+</div></div>
+
+<script>
+(function(){
+  var KEY="digipass_demo_photo";
+  var W=300,H=400; // 3:4, matches the 96x128 frame
+  var placeholder="data:image/svg+xml;utf8,"+encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'><defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#a5f3fc'/><stop offset='1' stop-color='#6366f1'/></linearGradient></defs><rect width='300' height='400' fill='url(#g)'/><circle cx='235' cy='70' r='34' fill='#fff' fill-opacity='.25'/><circle cx='60' cy='120' r='18' fill='#fff' fill-opacity='.2'/><path d='M30 400c0-90 55-130 120-130s120 40 120 130z' fill='#1f2a6b'/><rect x='128' y='215' width='44' height='65' rx='18' fill='#f1bf94'/><path d='M116 272l34 52 34-52z' fill='#fff'/><ellipse cx='92' cy='172' rx='9' ry='14' fill='#eeb98c'/><ellipse cx='208' cy='172' rx='9' ry='14' fill='#eeb98c'/><ellipse cx='150' cy='165' rx='58' ry='70' fill='#f6c9a0'/><path d='M90 160c-10-70 30-108 62-108s74 30 58 108c-6-34-22-52-60-56-36 4-54 22-60 56z' fill='#4a2a18'/><circle cx='128' cy='170' r='5.5' fill='#2b1d14'/><circle cx='172' cy='170' r='5.5' fill='#2b1d14'/><path d='M116 154q12-8 24 0M160 154q12-8 24 0' stroke='#4a2a18' stroke-width='4' fill='none' stroke-linecap='round'/><path d='M150 176v16q-6 4-11 0' stroke='#d99a6c' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M130 204q20 18 40 0' stroke='#b4532f' stroke-width='4' fill='none' stroke-linecap='round'/></svg>");
+  var state={photo:null,pending:null};
+  try{state.photo=localStorage.getItem(KEY)}catch(e){}
+  var img=document.getElementById("photoImg"),file=document.getElementById("file"),
+      modal=document.getElementById("modal"),prev=document.getElementById("prevImg"),err=document.getElementById("err");
+  function render(){img.src=state.photo||placeholder}
+  render();
+
+  document.getElementById("photoBtn").onclick=function(){file.value="";file.click()};
+
+  file.onchange=function(){
+    var f=file.files&&file.files[0]; if(!f)return;
+    var okType=/^image\/(jpeg|png|webp)$/.test(f.type)||/\.(jpe?g|png|webp)$/i.test(f.name);
+    if(!okType){alert("กรุณาเลือกไฟล์ JPG, JPEG, PNG หรือ WEBP");return}
+    var r=new FileReader();
+    r.onload=function(){
+      var im=new Image();
+      im.onload=function(){
+        // center-crop to 3:4 and downscale
+        var c=document.createElement("canvas");c.width=W;c.height=H;
+        var ctx=c.getContext("2d");
+        var target=W/H,src=im.width/im.height,sw,sh,sx,sy;
+        if(src>target){sh=im.height;sw=sh*target;sx=(im.width-sw)/2;sy=0}
+        else{sw=im.width;sh=sw/target;sx=0;sy=(im.height-sh)/2}
+        ctx.drawImage(im,sx,sy,sw,sh,0,0,W,H);
+        state.pending=c.toDataURL("image/jpeg",0.88);
+        prev.src=state.pending;err.textContent="";modal.classList.add("on");
+      };
+      im.onerror=function(){alert("ไม่สามารถอ่านไฟล์นี้เป็นรูปภาพได้")};
+      im.src=r.result;
+    };
+    r.readAsDataURL(f);
+  };
+
+  function close(){modal.classList.remove("on");state.pending=null}
+  document.getElementById("cancel").onclick=close;
+  modal.onclick=function(e){if(e.target===modal)close()};
+  document.getElementById("ok").onclick=function(){
+    state.photo=state.pending;render();
+    try{localStorage.setItem(KEY,state.photo)}catch(e){err.textContent="บันทึกไว้เฉพาะเซสชันนี้";}
+    close();
+  };
+  document.getElementById("reset").onclick=function(){
+    state.photo=null;try{localStorage.removeItem(KEY)}catch(e){}render();
+  };
+
+  document.querySelectorAll("nav button").forEach(function(b){
+    b.onclick=function(){
+      document.querySelectorAll("nav button").forEach(function(x){x.classList.remove("on")});
+      document.querySelectorAll(".page").forEach(function(x){x.classList.remove("on")});
+      b.classList.add("on");document.getElementById(b.dataset.p).classList.add("on");
+    };
+  });
+})();
+</script>
+<script>
+(function(){
+  var bn=document.getElementById("bn"),track=document.getElementById("bnTrack"),dotsBox=document.getElementById("bnDots");
+  var slides=track.children,n=slides.length,i=0,timer=null,DELAY=4000;
+  for(var k=0;k<n;k++){(function(k){
+    var d=document.createElement("button");d.type="button";d.setAttribute("aria-label","แบนเนอร์ "+(k+1));
+    d.onclick=function(){go(k);restart()};dotsBox.appendChild(d);
+  })(k)}
+  function go(x){
+    i=(x+n)%n;track.style.transform="translateX(-"+(i*100)+"%)";
+    for(var j=0;j<n;j++)dotsBox.children[j].classList.toggle("on",j===i);
+  }
+  function restart(){stop();timer=setInterval(function(){go(i+1)},DELAY)}
+  function stop(){if(timer){clearInterval(timer);timer=null}}
+  // swipe
+  var x0=null;
+  bn.addEventListener("pointerdown",function(e){x0=e.clientX;stop()});
+  bn.addEventListener("pointerup",function(e){
+    if(x0!==null){var dx=e.clientX-x0;if(Math.abs(dx)>40)go(i+(dx<0?1:-1))}
+    x0=null;restart();
+  });
+  bn.addEventListener("pointercancel",function(){x0=null;restart()});
+  bn.addEventListener("mouseenter",stop);bn.addEventListener("mouseleave",restart);
+  document.addEventListener("visibilitychange",function(){document.hidden?stop():restart()});
+  go(0);restart();
+})();
+</script>
+<script>
+(function(){
+  var zoom=document.getElementById("zoom"),zc=document.getElementById("zc");
+  document.getElementById("qExpand").onclick=function(){
+    var card=document.querySelector(".idcard"),w=card.offsetWidth;
+    var c=card.cloneNode(true);
+    [].forEach.call(c.querySelectorAll("[id]"),function(e){e.removeAttribute("id")});
+    c.style.width=w+"px";zc.innerHTML="";zc.appendChild(c);
+    zoom.classList.add("on");var gap=40,ch=c.offsetHeight,sc=Math.min((window.innerHeight-2*gap)/w,(window.innerWidth-2*gap)/ch);
+    zc.style.transform="rotate(90deg) scale("+sc+")";
+    zoom.classList.add("on");
+    zc.style.margin="0";zc.style.width=w+"px";
+  };
+  function closeZ(){zoom.classList.remove("on");zc.innerHTML=""}
+  zoom.onclick=closeZ;
+  document.getElementById("qProfile").onclick=function(){
+    document.querySelector('nav button[data-p="p-set"]').click();
+  };
+  var rb=document.getElementById("qRefresh");
+  rb.onclick=function(){
+    rb.classList.remove("spin");void rb.offsetWidth;rb.classList.add("spin");
+    var d=new Date(),h=("0"+d.getHours()).slice(-2),m=("0"+d.getMinutes()).slice(-2);
+
+  };
+})();
+</script>
+<script>
+(function(){
+  var KEY="digipass_demo_card",W=856,H=540,saved=null,pending=null;
+  var card=document.getElementById("idcard"),wi=document.getElementById("wholeImg"),cf=document.getElementById("cardFile"),
+      cm=document.getElementById("cmodal"),cp=document.getElementById("cprev"),ce=document.getElementById("cerr");
+  try{saved=localStorage.getItem(KEY)}catch(e){}
+  function render(){
+    if(saved){wi.src=saved;card.classList.add("whole")}
+    else{wi.removeAttribute("src");card.classList.remove("whole")}
+  }
+  render();
+  var pb=document.getElementById("photoBtn");if(pb)pb.onclick=null; // the whole card is one picture now
+  function pick(){cf.value="";cf.click()}
+  card.addEventListener("click",pick);
+  card.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();pick()}});
+  cf.onchange=function(){
+    var f=cf.files&&cf.files[0];if(!f)return;
+    var ok=/^image\/(jpeg|png|webp)$/.test(f.type)||/\.(jpe?g|png|webp)$/i.test(f.name);
+    if(!ok){alert("กรุณาเลือกไฟล์ JPG, JPEG, PNG หรือ WEBP");return}
+    var r=new FileReader();
+    r.onload=function(){
+      var im=new Image();
+      im.onload=function(){
+        var c=document.createElement("canvas");c.width=W;c.height=H;
+        var ctx=c.getContext("2d"),t=W/H,s=im.width/im.height,sw,sh,sx,sy;
+        if(s>t){sh=im.height;sw=sh*t;sx=(im.width-sw)/2;sy=0}
+        else{sw=im.width;sh=sw/t;sx=0;sy=(im.height-sh)/2}
+        ctx.drawImage(im,sx,sy,sw,sh,0,0,W,H);
+        pending=c.toDataURL("image/jpeg",0.88);
+        cp.src=pending;ce.textContent="";cm.classList.add("on");
+      };
+      im.onerror=function(){alert("ไม่สามารถอ่านไฟล์นี้เป็นรูปภาพได้")};
+      im.src=r.result;
+    };
+    r.readAsDataURL(f);
+  };
+  function close(){cm.classList.remove("on");pending=null}
+  document.getElementById("ccancel").onclick=close;
+  cm.onclick=function(e){if(e.target===cm)close()};
+  document.getElementById("cok").onclick=function(){
+    saved=pending;render();
+    try{localStorage.setItem(KEY,saved)}catch(e){ce.textContent="บันทึกไว้เฉพาะเซสชันนี้"}
+    close();
+  };
+  document.getElementById("reset").addEventListener("click",function(){
+    saved=null;try{localStorage.removeItem(KEY)}catch(e){}render();
+  });
+})();
+</script>
+<script>
+(function(){
+  var el=document.getElementById("hname"),KEY="digipass_demo_name",def=el.textContent;
+  try{var s=localStorage.getItem(KEY);if(s)el.textContent=s;}catch(e){}
+  el.addEventListener("keydown",function(e){if(e.key==="Enter"){e.preventDefault();el.blur();}});
+  el.addEventListener("paste",function(e){e.preventDefault();var x=(e.clipboardData||window.clipboardData).getData("text").replace(/\s+/g," ");document.execCommand("insertText",false,x);});
+  el.addEventListener("blur",function(){
+    var v=el.textContent.replace(/\s+/g," ").trim();
+    if(!v)v=def;
+    el.textContent=v;
+    try{localStorage.setItem(KEY,v);}catch(e){}
+  });
+})();
+</script>
+<script>
+(function(){
+  var KEY="digipass_demo_avatar",S=256;
+  var btn=document.getElementById("avBtn"),file=document.getElementById("avFile"),img=document.getElementById("avImg"),svg=btn.querySelector("svg");
+  function show(src){
+    if(src){img.src=src;img.hidden=false;svg.style.display="none";}
+    else{img.hidden=true;img.removeAttribute("src");svg.style.display="";}
+  }
+  try{var s=localStorage.getItem(KEY);if(s)show(s);}catch(e){}
+  btn.onclick=function(){file.value="";file.click();};
+  file.onchange=function(){
+    var f=file.files&&file.files[0];if(!f)return;
+    if(!(/^image\/(jpeg|png|webp)$/.test(f.type)||/\.(jpe?g|png|webp)$/i.test(f.name))){alert("กรุณาเลือกไฟล์ JPG, JPEG, PNG หรือ WEBP");return;}
+    var r=new FileReader();
+    r.onload=function(){
+      var im=new Image();
+      im.onload=function(){
+        var c=document.createElement("canvas");c.width=c.height=S;
+        var m=Math.min(im.width,im.height),sx=(im.width-m)/2,sy=(im.height-m)/2;
+        c.getContext("2d").drawImage(im,sx,sy,m,m,0,0,S,S);
+        var d=c.toDataURL("image/jpeg",0.88);
+        show(d);
+        try{localStorage.setItem(KEY,d);}catch(e){}
+      };
+      im.onerror=function(){alert("ไม่สามารถอ่านไฟล์นี้เป็นรูปภาพได้");};
+      im.src=r.result;
+    };
+    r.readAsDataURL(f);
+  };
+  var rb=document.getElementById("avReset");
+  if(rb)rb.onclick=function(){show(null);try{localStorage.removeItem(KEY);}catch(e){}};
+})();
+</script>
+</body>
+</html>
